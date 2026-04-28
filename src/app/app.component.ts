@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.css",
 })
-export class AppComponent {
-  title = 'AppListas';
+export class AppComponent implements OnInit {
+  title = "appListas";
+  msg = "Hola, bienvenido a mi proyecto en Angular";
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.msg = "";
+    }, 5000);
+  }
 }
