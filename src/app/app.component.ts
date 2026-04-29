@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
 import { Lista } from "./models/lista";
 
 @Component({
@@ -37,7 +38,12 @@ export class AppComponent implements OnInit {
     this.nueva = new Lista();
   }
 
-  guardarLista(): void {
+  guardarLista(form: NgForm): void {
+    if (form.invalid) {
+      form.form.markAllAsTouched();
+      return;
+    }
+
     this.listas.push({ ...this.nueva });
     this.nueva = new Lista();
     this.mostrarFormulario = false;
@@ -46,6 +52,18 @@ export class AppComponent implements OnInit {
   cancelarFormulario(): void {
     this.nueva = new Lista();
     this.mostrarFormulario = false;
+  }
+
+  eliminarLista(lista: Lista): void {
+    const index = this.listas.indexOf(lista);
+    if (index > -1) {
+      this.listas.splice(index, 1);
+    }
+  }
+
+  editarLista(lista: Lista): void {
+    console.log('Editar lista:', lista);
+    // Aquí irá la lógica de edición
   }
 
   ngOnInit(): void {

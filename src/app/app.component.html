@@ -196,29 +196,47 @@
       Crear nuevo
     </button>
 
-    <form class="card mb-3" *ngIf="mostrarFormulario" (ngSubmit)="guardarLista()">
+    <form class="card mb-3" *ngIf="mostrarFormulario" #listaForm="ngForm" (ngSubmit)="guardarLista(listaForm)">
       <div class="card-body">
         <div class="mb-3">
-          <label class="form-label" for="nombre">Nombre</label>
+          <label class="form-label" for="nombre">Nombre *</label>
           <input
             class="form-control"
+            [ngClass]="{ 'is-invalid': nombreRef.invalid && nombreRef.touched }"
             id="nombre"
             name="nombre"
             type="text"
             [(ngModel)]="nueva.nombre"
+            #nombreRef="ngModel"
             required
+            minlength="3"
           />
+          <div class="invalid-feedback" *ngIf="nombreRef.errors?.['required'] && nombreRef.touched">
+            El nombre es obligatorio.
+          </div>
+          <div class="invalid-feedback" *ngIf="nombreRef.errors?.['minlength'] && nombreRef.touched">
+            El nombre debe tener al menos 3 caracteres.
+          </div>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="descripcion">Descripcion</label>
+          <label class="form-label" for="descripcion">Descripcion *</label>
           <textarea
             class="form-control"
+            [ngClass]="{ 'is-invalid': descripcionRef.invalid && descripcionRef.touched }"
             id="descripcion"
             name="descripcion"
             [(ngModel)]="nueva.descripcion"
+            #descripcionRef="ngModel"
             required
+            minlength="5"
           ></textarea>
+          <div class="invalid-feedback" *ngIf="descripcionRef.errors?.['required'] && descripcionRef.touched">
+            La descripción es obligatoria.
+          </div>
+          <div class="invalid-feedback" *ngIf="descripcionRef.errors?.['minlength'] && descripcionRef.touched">
+            La descripción debe tener al menos 5 caracteres.
+          </div>
         </div>
 
         <div class="mb-3">
@@ -236,21 +254,21 @@
           </select>
         </div>
 
-        <button class="btn btn-success me-2" type="submit">Guardar</button>
+        <div class="mb-3 text-muted">Los campos marcados con * son obligatorios.</div>
+
+        <button class="btn btn-success me-2" type="submit" [disabled]="listaForm.invalid">Guardar</button>
         <button class="btn btn-secondary" type="button" (click)="cancelarFormulario()">
           Cancelar
         </button>
       </div>
     </form>
 
-    <div class="card mb-2" [ngClass]="item.color" *ngFor="let item of listas">
-      <div class="card-body">
-        <h5 class="card-title">{{ item.nombre }}</h5>
-        <p class="card-text">{{ item.descripcion }}</p>
-        <button class="btn btn-light me-2">Ver detalle</button>
-        <button class="btn btn-light me-2">Modificar</button>
-        <button class="btn btn-light">Eliminar</button>
-      </div>
+    <div class="card mb-2" *ngFor="let item of listas">
+      <app-lista 
+        [lista]="item"
+        (eliminar)="eliminarLista($event)"
+        (editar)="editarLista($event)">
+      </app-lista>
     </div>
   </div>
 </main>

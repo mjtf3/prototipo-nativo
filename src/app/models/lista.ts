@@ -7,7 +7,7 @@ export class Lista {
   constructor() {
     this.nombre = "";
     this.descripcion = "";
-    this.color = "#FFFFFF";
+    this.color = "bg-primary text-white";
     this.visible = true;
   }
 }

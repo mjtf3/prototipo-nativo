@@ -1,0 +1,40 @@
+<div class="card mb-2" [ngClass]="lista.color" *ngIf="lista">
+  <!-- Vista Resumida -->
+  <div class="card-body" *ngIf="!mostrarDetalle">
+    <h5 class="card-title">{{ lista.nombre }}</h5>
+    <p class="card-text text-truncate">{{ lista.descripcion }}</p>
+    <button class="btn btn-light me-2" (click)="verDetalle()">Ver detalle</button>
+    <button class="btn btn-light" (click)="abrirModalEliminar()">Eliminar</button>
+  </div>
+
+  <!-- Vista Detalle -->
+  <div class="card-body" *ngIf="mostrarDetalle">
+    <h5 class="card-title">{{ lista.nombre }}</h5>
+    <p class="card-text">{{ lista.descripcion }}</p>
+    
+    <h6 class="mt-3 mb-2">Tareas:</h6>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let tarea of tareas" [ngClass]="{ 'text-decoration-line-through': tarea.completada }">
+        <input type="checkbox" [checked]="tarea.completada" (change)="toggleTarea(tarea)" class="form-check-input me-2">
+        {{ tarea.nombre }}
+      </li>
+    </ul>
+
+    <button class="btn btn-secondary mt-3" (click)="ocultarDetalle()">Volver al listado</button>
+  </div>
+</div>
+
+<!-- Modal de confirmación de eliminación -->
+<ng-template #modalEliminar let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmar eliminación</h4>
+    <button type="button" class="btn-close" (click)="cancelarEliminar()"></button>
+  </div>
+  <div class="modal-body">
+    ¿Estás seguro de que deseas eliminar la lista "<strong>{{ lista?.nombre }}</strong>"?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cancelarEliminar()">Cancelar</button>
+    <button type="button" class="btn btn-danger" (click)="confirmarEliminar()">Eliminar</button>
+  </div>
+</ng-template>
