@@ -10,7 +10,7 @@ import { Tarea } from '../../models/tarea';
   encapsulation: ViewEncapsulation.None
 })
 export class ListaComponent {
-  @Input() lista: Lista | null = null;
+  @Input({ required: true }) lista!: Lista;
   @Output() eliminar = new EventEmitter<Lista>();
   @Output() editar = new EventEmitter<Lista>();
   @ViewChild('modalEliminar') modalEliminar!: TemplateRef<any>;
@@ -37,9 +37,7 @@ export class ListaComponent {
   }
 
   confirmarEliminar(): void {
-    if (this.lista) {
-      this.eliminar.emit(this.lista);
-    }
+    this.eliminar.emit(this.lista);
     if (this.modalRef) {
       this.modalRef.close();
     }
@@ -52,14 +50,10 @@ export class ListaComponent {
   }
 
   eliminarLista(): void {
-    if (this.lista) {
-      this.eliminar.emit(this.lista);
-    }
+    this.eliminar.emit(this.lista);
   }
 
   editarLista(): void {
-    if (this.lista) {
-      this.editar.emit(this.lista);
-    }
+    this.editar.emit(this.lista);
   }
 }

@@ -1,1 +1,9 @@
-<p>tarea works!</p>
+<li class="list-group-item" [ngClass]="{ 'text-decoration-line-through': tarea.completada }">
+  <input
+    type="checkbox"
+    [checked]="tarea.completada"
+    (change)="cambiarCompletada()"
+    class="form-check-input me-2"
+  />
+  {{ tarea.nombre }}
+</li>
