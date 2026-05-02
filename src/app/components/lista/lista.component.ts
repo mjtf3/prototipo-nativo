@@ -16,6 +16,7 @@ export class ListaComponent {
   @ViewChild('modalEliminar') modalEliminar!: TemplateRef<any>;
 
   mostrarDetalle = false;
+  filtroTareas: String = "todas";
   modalRef?: NgbModalRef;
 
   constructor(private modalService: NgbModal) {}
@@ -30,6 +31,18 @@ export class ListaComponent {
 
   toggleTarea(tarea: Tarea): void {
     tarea.completada = !tarea.completada;
+  }
+
+  get tareasFiltradas(): Tarea[] {
+    if (this.filtroTareas === "acabadas") {
+      return this.lista.tareas.filter((tarea) => tarea.completada);
+    }
+
+    if (this.filtroTareas === "noacabadas") {
+      return this.lista.tareas.filter((tarea) => !tarea.completada);
+    }
+
+    return this.lista.tareas;
   }
 
   abrirModalEliminar(): void {
