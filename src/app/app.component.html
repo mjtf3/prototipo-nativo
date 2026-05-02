@@ -188,13 +188,20 @@
 
 <main class="main">
   <div class="container">
-    <h1>{{ title }}</h1>
+    <h1 class="mb-4">{{ title }}</h1>
     <ngb-alert type="success" *ngIf="msg != ''" (close)="msg = ''">
       {{ msg }}
     </ngb-alert>
-    <button class="btn btn-primary mb-3" (click)="abrirFormulario()">
-      Crear nuevo
-    </button>
+    <div class="d-flex gap-4">
+      <button class="btn btn-primary mb-3" (click)="abrirFormulario()">
+        Crear nuevo
+      </button>
+      <select class="form-select mb-3 w-auto" [(ngModel)]="filtroVisibilidad">
+        <option value="todas">Todas las listas</option>
+        <option value="visibles">Solo visibles</option>
+        <option value="novisibles">Solo no visibles</option>
+      </select>
+    </div>
 
     <form class="card mb-3" *ngIf="mostrarFormulario" #listaForm="ngForm" (ngSubmit)="guardarLista(listaForm)">
       <div class="card-body">
@@ -263,8 +270,8 @@
       </div>
     </form>
 
-    <div class="card mb-2" *ngFor="let item of listas">
-      <app-lista 
+    <div class="card mb-2" *ngFor="let item of listasFiltradas">
+      <app-lista
         [lista]="item"
         (eliminar)="eliminarLista($event)"
         (editar)="editarLista($event)">

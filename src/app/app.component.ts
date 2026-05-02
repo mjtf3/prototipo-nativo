@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   msg = "Hola, bienvenido a mi proyecto en Angular";
   mostrarFormulario = false;
   nueva: Lista = new Lista();
+  filtroVisibilidad: String = "todas";
   listas: Lista[] = [
     {
       nombre: "Compra",
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
       nombre: "Trabajo",
       descripcion: "Tareas pendientes del proyecto",
       color: "bg-success text-white",
-      visible: true,
+      visible: false,
     },
     {
       nombre: "Estudios",
@@ -32,6 +33,18 @@ export class AppComponent implements OnInit {
       visible: true,
     },
   ];
+
+  get listasFiltradas(): Lista[] {
+    if (this.filtroVisibilidad === "visibles") {
+      return this.listas.filter((lista) => lista.visible);
+    }
+
+    if (this.filtroVisibilidad === "novisibles") {
+      return this.listas.filter((lista) => !lista.visible);
+    }
+
+    return this.listas;
+  }
 
   abrirFormulario(): void {
     this.mostrarFormulario = true;
@@ -62,7 +75,7 @@ export class AppComponent implements OnInit {
   }
 
   editarLista(lista: Lista): void {
-    console.log('Editar lista:', lista);
+    console.log("Editar lista:", lista);
     // Aquí irá la lógica de edición
   }
 
