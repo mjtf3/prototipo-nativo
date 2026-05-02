@@ -1,4 +1,4 @@
-<div class="card mb-2" [ngClass]="lista.color" *ngIf="lista">
+<div class="card mb-2" [ngClass]="lista.color">
   <!-- Vista Resumida -->
   <div class="card-body" *ngIf="!mostrarDetalle">
     <h5 class="card-title">{{ lista.nombre }}</h5>
@@ -11,13 +11,14 @@
   <div class="card-body" *ngIf="mostrarDetalle">
     <h5 class="card-title">{{ lista.nombre }}</h5>
     <p class="card-text">{{ lista.descripcion }}</p>
-    
+
     <h6 class="mt-3 mb-2">Tareas:</h6>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngFor="let tarea of lista.tareas" [ngClass]="{ 'text-decoration-line-through': tarea.completada }">
-        <input type="checkbox" [checked]="tarea.completada" (change)="toggleTarea(tarea)" class="form-check-input me-2">
-        {{ tarea.nombre }}
-      </li>
+      <app-tarea
+        *ngFor="let tarea of lista.tareas"
+        [tarea]="tarea"
+        (toggle)="toggleTarea($event)">
+      </app-tarea>
     </ul>
 
     <button class="btn btn-secondary mt-3" (click)="ocultarDetalle()">Volver al listado</button>
@@ -31,7 +32,7 @@
     <button type="button" class="btn-close" (click)="cancelarEliminar()"></button>
   </div>
   <div class="modal-body">
-    ¿Estás seguro de que deseas eliminar la lista "<strong>{{ lista?.nombre }}</strong>"?
+    ¿Estás seguro de que deseas eliminar la lista "<strong>{{ lista.nombre }}</strong>"?
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="cancelarEliminar()">Cancelar</button>
