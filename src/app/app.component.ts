@@ -19,18 +19,30 @@ export class AppComponent implements OnInit {
       descripcion: "Productos pendientes para comprar",
       color: "bg-primary text-white",
       visible: true,
+      tareas: [
+        { id: 1, nombre: "Comprar leche", completada: false },
+        { id: 2, nombre: "Comprar pan", completada: true },
+      ],
     },
     {
       nombre: "Trabajo",
       descripcion: "Tareas pendientes del proyecto",
       color: "bg-success text-white",
       visible: false,
+      tareas: [
+        { id: 1, nombre: "Preparar presentacion", completada: false },
+        { id: 2, nombre: "Revisar pull request", completada: false },
+      ],
     },
     {
       nombre: "Estudios",
       descripcion: "Temas para repasar esta semana",
       color: "bg-warning text-dark",
       visible: true,
+      tareas: [
+        { id: 1, nombre: "Repasar Angular", completada: true },
+        { id: 2, nombre: "Practicar TypeScript", completada: false },
+      ],
     },
   ];
 

@@ -14,7 +14,7 @@
     
     <h6 class="mt-3 mb-2">Tareas:</h6>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngFor="let tarea of tareas" [ngClass]="{ 'text-decoration-line-through': tarea.completada }">
+      <li class="list-group-item" *ngFor="let tarea of lista.tareas" [ngClass]="{ 'text-decoration-line-through': tarea.completada }">
         <input type="checkbox" [checked]="tarea.completada" (change)="toggleTarea(tarea)" class="form-check-input me-2">
         {{ tarea.nombre }}
       </li>

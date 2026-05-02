@@ -1,12 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewEncapsulation, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Lista } from '../../models/lista';
-
-interface Tarea {
-  id: number;
-  nombre: string;
-  completada: boolean;
-}
+import { Tarea } from '../../models/tarea';
 
 @Component({
   selector: 'app-lista',
@@ -14,29 +9,16 @@ interface Tarea {
   styleUrl: './lista.component.css',
   encapsulation: ViewEncapsulation.None
 })
-export class ListaComponent implements OnInit {
+export class ListaComponent {
   @Input() lista: Lista | null = null;
   @Output() eliminar = new EventEmitter<Lista>();
   @Output() editar = new EventEmitter<Lista>();
   @ViewChild('modalEliminar') modalEliminar!: TemplateRef<any>;
 
   mostrarDetalle = false;
-  tareas: Tarea[] = [];
   modalRef?: NgbModalRef;
 
   constructor(private modalService: NgbModal) {}
-
-  ngOnInit(): void {
-    this.inicializarTareas();
-  }
-
-  inicializarTareas(): void {
-    this.tareas = [
-      { id: 1, nombre: 'Tarea 1', completada: false },
-      { id: 2, nombre: 'Tarea 2', completada: true },
-      { id: 3, nombre: 'Tarea 3', completada: false }
-    ];
-  }
 
   verDetalle(): void {
     this.mostrarDetalle = true;
