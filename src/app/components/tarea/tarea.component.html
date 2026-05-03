@@ -1,9 +1,25 @@
-<li class="list-group-item" [ngClass]="{ 'text-decoration-line-through': tarea.completada }">
-  <input
-    type="checkbox"
-    [checked]="tarea.completada"
-    (change)="cambiarCompletada()"
-    class="form-check-input me-2"
-  />
-  {{ tarea.nombre }}
+<li class="list-group-item d-flex justify-content-between gap-3">
+  <div [ngClass]="{ 'text-decoration-line-through': tarea.completada }">
+    <div class="form-check">
+      <input
+        type="checkbox"
+        [checked]="tarea.completada"
+        (change)="cambiarCompletada()"
+        class="form-check-input"
+      />
+      <label class="form-check-label fw-semibold">
+        {{ tarea.nombre }}
+      </label>
+    </div>
+    <div class="small text-muted ms-4" *ngIf="tarea.descripcion">
+      {{ tarea.descripcion }}
+    </div>
+    <div class="small text-muted ms-4" *ngIf="tarea.fechaFinalizacion">
+      Fecha finalizacion: {{ tarea.fechaFinalizacion }}
+    </div>
+  </div>
+
+  <button class="btn btn-outline-danger btn-sm align-self-start" type="button" (click)="eliminarTarea()">
+    Eliminar
+  </button>
 </li>

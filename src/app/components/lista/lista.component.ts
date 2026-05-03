@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, TemplateRef, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Lista } from '../../models/lista';
 import { Tarea } from '../../models/tarea';
@@ -17,6 +18,7 @@ export class ListaComponent {
 
   mostrarDetalle = false;
   filtroTareas: String = "todas";
+  nuevaTarea: Tarea = new Tarea();
   modalRef?: NgbModalRef;
 
   constructor(private modalService: NgbModal) {}
@@ -42,7 +44,40 @@ export class ListaComponent {
       return this.lista.tareas.filter((tarea) => !tarea.completada);
     }
 
+    if (this.filtroTareas === "visibles") {
+      return this.lista.tareas.filter((tarea) => tarea.visible);
+    }
+
+    if (this.filtroTareas === "ocultas") {
+      return this.lista.tareas.filter((tarea) => !tarea.visible);
+    }
+
     return this.lista.tareas;
+  }
+
+  guardarTarea(form: NgForm): void {
+    if (form.invalid) {
+      form.form.markAllAsTouched();
+      return;
+    }
+
+    const siguienteId = this.lista.tareas.length
+      ? Math.max(...this.lista.tareas.map((tarea) => tarea.id)) + 1
+      : 1;
+
+    this.lista.tareas.push({
+      ...this.nuevaTarea,
+      id: siguienteId,
+    });
+    this.nuevaTarea = new Tarea();
+    form.resetForm(this.nuevaTarea);
+  }
+
+  eliminarTarea(tarea: Tarea): void {
+    const index = this.lista.tareas.indexOf(tarea);
+    if (index > -1) {
+      this.lista.tareas.splice(index, 1);
+    }
   }
 
   abrirModalEliminar(): void {

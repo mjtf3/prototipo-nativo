@@ -21,8 +21,22 @@ export class AppComponent implements OnInit {
       color: "bg-primary text-white",
       visible: true,
       tareas: [
-        { id: 1, nombre: "Comprar leche", completada: false },
-        { id: 2, nombre: "Comprar pan", completada: true },
+        {
+          id: 1,
+          nombre: "Comprar leche",
+          descripcion: "Comprar dos litros de leche",
+          fechaFinalizacion: "2026-05-04",
+          visible: true,
+          completada: false,
+        },
+        {
+          id: 2,
+          nombre: "Comprar pan",
+          descripcion: "Pasar por la panaderia",
+          fechaFinalizacion: "2026-05-04",
+          visible: true,
+          completada: true,
+        },
       ],
     },
     {
@@ -31,8 +45,22 @@ export class AppComponent implements OnInit {
       color: "bg-success text-white",
       visible: false,
       tareas: [
-        { id: 1, nombre: "Preparar presentacion", completada: false },
-        { id: 2, nombre: "Revisar pull request", completada: false },
+        {
+          id: 1,
+          nombre: "Preparar presentacion",
+          descripcion: "Preparar las diapositivas del proyecto",
+          fechaFinalizacion: "2026-05-06",
+          visible: true,
+          completada: false,
+        },
+        {
+          id: 2,
+          nombre: "Revisar pull request",
+          descripcion: "Comprobar cambios pendientes",
+          fechaFinalizacion: "2026-05-07",
+          visible: true,
+          completada: false,
+        },
       ],
     },
     {
@@ -41,8 +69,22 @@ export class AppComponent implements OnInit {
       color: "bg-warning text-dark",
       visible: true,
       tareas: [
-        { id: 1, nombre: "Repasar Angular", completada: true },
-        { id: 2, nombre: "Practicar TypeScript", completada: false },
+        {
+          id: 1,
+          nombre: "Repasar Angular",
+          descripcion: "Repasar componentes, bindings y formularios",
+          fechaFinalizacion: "2026-05-05",
+          visible: true,
+          completada: true,
+        },
+        {
+          id: 2,
+          nombre: "Practicar TypeScript",
+          descripcion: "Practicar clases e interfaces",
+          fechaFinalizacion: "2026-05-08",
+          visible: true,
+          completada: false,
+        },
       ],
     },
   ];
