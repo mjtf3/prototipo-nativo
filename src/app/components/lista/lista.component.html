@@ -2,6 +2,9 @@
   <!-- Vista Resumida -->
   <div class="card-body" *ngIf="!mostrarDetalle">
     <h5 class="card-title">{{ lista.nombre }}</h5>
+    <div class="small mb-2">
+      ID: {{ lista.id }} | Creada: {{ lista.fechaCreacion }}
+    </div>
     <p class="card-text text-truncate">{{ lista.descripcion }}</p>
     <button class="btn btn-light me-2" (click)="verDetalle()">Ver detalle</button>
     <button class="btn btn-light me-2" (click)="editarLista()">Modificar</button>
@@ -11,6 +14,9 @@
   <!-- Vista Detalle -->
   <div class="card-body" *ngIf="mostrarDetalle">
     <h5 class="card-title">{{ lista.nombre }}</h5>
+    <div class="small mb-2">
+      ID: {{ lista.id }} | Creada: {{ lista.fechaCreacion }}
+    </div>
     <p class="card-text">{{ lista.descripcion }}</p>
 
     <h6 class="mt-3 mb-2">Tareas:</h6>
@@ -38,7 +44,7 @@
         </div>
 
         <div class="col-md-6">
-          <label class="form-label" for="fechaFinalizacion">Fecha finalizacion</label>
+          <label class="form-label" for="fechaFinalizacion">Fecha finalización</label>
           <input
             class="form-control"
             id="fechaFinalizacion"
@@ -49,7 +55,7 @@
         </div>
 
         <div class="col-12">
-          <label class="form-label" for="descripcionTarea">Descripcion *</label>
+          <label class="form-label" for="descripcionTarea">Descripción *</label>
           <textarea
             class="form-control"
             [ngClass]="{ 'is-invalid': descripcionTareaRef.invalid && descripcionTareaRef.touched }"
@@ -61,10 +67,10 @@
             minlength="5"
           ></textarea>
           <div class="invalid-feedback" *ngIf="descripcionTareaRef.errors?.['required'] && descripcionTareaRef.touched">
-            La descripcion es obligatoria.
+            La descripción es obligatoria.
           </div>
           <div class="invalid-feedback" *ngIf="descripcionTareaRef.errors?.['minlength'] && descripcionTareaRef.touched">
-            La descripcion debe tener al menos 5 caracteres.
+            La descripción debe tener al menos 5 caracteres.
           </div>
         </div>
 
@@ -83,7 +89,7 @@
 
         <div class="col-12">
           <button class="btn btn-success" type="submit" [disabled]="tareaForm.invalid">
-            Anadir tarea
+            Añadir tarea
           </button>
         </div>
       </div>

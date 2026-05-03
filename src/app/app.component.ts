@@ -16,10 +16,12 @@ export class AppComponent implements OnInit {
   filtroVisibilidad: String = "todas";
   listas: Lista[] = [
     {
+      id: 1,
       nombre: "Compra",
       descripcion: "Productos pendientes para comprar",
       color: "bg-primary text-white",
       visible: true,
+      fechaCreacion: "2026-04-28",
       tareas: [
         {
           id: 1,
@@ -32,7 +34,7 @@ export class AppComponent implements OnInit {
         {
           id: 2,
           nombre: "Comprar pan",
-          descripcion: "Pasar por la panaderia",
+          descripcion: "Pasar por la panadería",
           fechaFinalizacion: "2026-05-04",
           visible: true,
           completada: true,
@@ -40,14 +42,16 @@ export class AppComponent implements OnInit {
       ],
     },
     {
+      id: 2,
       nombre: "Trabajo",
       descripcion: "Tareas pendientes del proyecto",
       color: "bg-success text-white",
       visible: false,
+      fechaCreacion: "2026-04-29",
       tareas: [
         {
           id: 1,
-          nombre: "Preparar presentacion",
+          nombre: "Preparar presentación",
           descripcion: "Preparar las diapositivas del proyecto",
           fechaFinalizacion: "2026-05-06",
           visible: true,
@@ -64,10 +68,12 @@ export class AppComponent implements OnInit {
       ],
     },
     {
+      id: 3,
       nombre: "Estudios",
       descripcion: "Temas para repasar esta semana",
       color: "bg-warning text-dark",
       visible: true,
+      fechaCreacion: "2026-04-30",
       tareas: [
         {
           id: 1,
@@ -119,7 +125,11 @@ export class AppComponent implements OnInit {
       this.listaEditando.color = this.nueva.color;
       this.listaEditando.visible = this.nueva.visible;
     } else {
-      this.listas.push({ ...this.nueva });
+      this.listas.push({
+        ...this.nueva,
+        id: this.obtenerSiguienteIdLista(),
+        fechaCreacion: new Date().toISOString().substring(0, 10),
+      });
     }
 
     this.nueva = new Lista();
@@ -144,6 +154,12 @@ export class AppComponent implements OnInit {
     this.listaEditando = lista;
     this.nueva = { ...lista };
     this.mostrarFormulario = true;
+  }
+
+  private obtenerSiguienteIdLista(): number {
+    return this.listas.length
+      ? Math.max(...this.listas.map((lista) => lista.id)) + 1
+      : 1;
   }
 
   ngOnInit(): void {
