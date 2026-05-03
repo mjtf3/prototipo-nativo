@@ -44,14 +44,6 @@ export class ListaComponent {
       return this.lista.tareas.filter((tarea) => !tarea.completada);
     }
 
-    if (this.filtroTareas === "visibles") {
-      return this.lista.tareas.filter((tarea) => tarea.visible);
-    }
-
-    if (this.filtroTareas === "ocultas") {
-      return this.lista.tareas.filter((tarea) => !tarea.visible);
-    }
-
     return this.lista.tareas;
   }
 

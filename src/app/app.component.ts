@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
           nombre: "Comprar leche",
           descripcion: "Comprar dos litros de leche",
           fechaFinalizacion: "2026-05-04",
-          visible: true,
           completada: false,
         },
         {
@@ -36,7 +35,6 @@ export class AppComponent implements OnInit {
           nombre: "Comprar pan",
           descripcion: "Pasar por la panadería",
           fechaFinalizacion: "2026-05-04",
-          visible: true,
           completada: true,
         },
       ],
@@ -54,7 +52,6 @@ export class AppComponent implements OnInit {
           nombre: "Preparar presentación",
           descripcion: "Preparar las diapositivas del proyecto",
           fechaFinalizacion: "2026-05-06",
-          visible: true,
           completada: false,
         },
         {
@@ -62,7 +59,6 @@ export class AppComponent implements OnInit {
           nombre: "Revisar pull request",
           descripcion: "Comprobar cambios pendientes",
           fechaFinalizacion: "2026-05-07",
-          visible: true,
           completada: false,
         },
       ],
@@ -80,7 +76,6 @@ export class AppComponent implements OnInit {
           nombre: "Repasar Angular",
           descripcion: "Repasar componentes, bindings y formularios",
           fechaFinalizacion: "2026-05-05",
-          visible: true,
           completada: true,
         },
         {
@@ -88,7 +83,6 @@ export class AppComponent implements OnInit {
           nombre: "Practicar TypeScript",
           descripcion: "Practicar clases e interfaces",
           fechaFinalizacion: "2026-05-08",
-          visible: true,
           completada: false,
         },
       ],

@@ -75,19 +75,6 @@
         </div>
 
         <div class="col-12">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              id="visibleTarea"
-              name="visibleTarea"
-              type="checkbox"
-              [(ngModel)]="nuevaTarea.visible"
-            />
-            <label class="form-check-label" for="visibleTarea">Visible</label>
-          </div>
-        </div>
-
-        <div class="col-12">
           <button class="btn btn-success" type="submit" [disabled]="tareaForm.invalid">
             Añadir tarea
           </button>
@@ -99,8 +86,6 @@
       <option value="todas">Todas las tareas</option>
       <option value="acabadas">Solo acabadas</option>
       <option value="noacabadas">Solo no acabadas</option>
-      <option value="visibles">Solo visibles</option>
-      <option value="ocultas">Solo ocultas</option>
     </select>
     <ul class="list-group list-group-flush">
       <app-tarea
