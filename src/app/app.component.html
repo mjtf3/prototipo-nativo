@@ -205,6 +205,10 @@
 
     <form class="card mb-3" *ngIf="mostrarFormulario" #listaForm="ngForm" (ngSubmit)="guardarLista(listaForm)">
       <div class="card-body">
+        <h5 class="card-title mb-3">
+          {{ listaEditando ? "Modificar lista" : "Nueva lista" }}
+        </h5>
+
         <div class="mb-3">
           <label class="form-label" for="nombre">Nombre *</label>
           <input
@@ -261,9 +265,22 @@
           </select>
         </div>
 
+        <div class="form-check mb-3">
+          <input
+            class="form-check-input"
+            id="visible"
+            name="visible"
+            type="checkbox"
+            [(ngModel)]="nueva.visible"
+          />
+          <label class="form-check-label" for="visible">Visible</label>
+        </div>
+
         <div class="mb-3 text-muted">Los campos marcados con * son obligatorios.</div>
 
-        <button class="btn btn-success me-2" type="submit" [disabled]="listaForm.invalid">Guardar</button>
+        <button class="btn btn-success me-2" type="submit" [disabled]="listaForm.invalid">
+          {{ listaEditando ? "Guardar cambios" : "Guardar" }}
+        </button>
         <button class="btn btn-secondary" type="button" (click)="cancelarFormulario()">
           Cancelar
         </button>

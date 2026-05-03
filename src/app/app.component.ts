@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   msg = "Hola, bienvenido a mi proyecto en Angular";
   mostrarFormulario = false;
   nueva: Lista = new Lista();
+  listaEditando: Lista | null = null;
   filtroVisibilidad: String = "todas";
   listas: Lista[] = [
     {
@@ -60,6 +61,7 @@ export class AppComponent implements OnInit {
 
   abrirFormulario(): void {
     this.mostrarFormulario = true;
+    this.listaEditando = null;
     this.nueva = new Lista();
   }
 
@@ -69,13 +71,23 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    this.listas.push({ ...this.nueva });
+    if (this.listaEditando) {
+      this.listaEditando.nombre = this.nueva.nombre;
+      this.listaEditando.descripcion = this.nueva.descripcion;
+      this.listaEditando.color = this.nueva.color;
+      this.listaEditando.visible = this.nueva.visible;
+    } else {
+      this.listas.push({ ...this.nueva });
+    }
+
     this.nueva = new Lista();
+    this.listaEditando = null;
     this.mostrarFormulario = false;
   }
 
   cancelarFormulario(): void {
     this.nueva = new Lista();
+    this.listaEditando = null;
     this.mostrarFormulario = false;
   }
 
@@ -87,8 +99,9 @@ export class AppComponent implements OnInit {
   }
 
   editarLista(lista: Lista): void {
-    console.log("Editar lista:", lista);
-    // Aquí irá la lógica de edición
+    this.listaEditando = lista;
+    this.nueva = { ...lista };
+    this.mostrarFormulario = true;
   }
 
   ngOnInit(): void {
